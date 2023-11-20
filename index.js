@@ -2,16 +2,26 @@ const express = require('express');
 const server = express();
 const axios = require('axios');
 const cheerio = require('cheerio');
-const Character = require('./models/Character')
+const Character = require('./models/Character');
+const CharacterServidor = require('./models/CharacterServidor');
 
-const url = "https://www.tibia.com/community/?subtopic=guilds&page=view&GuildName=United&action=characters";
+var url = "";
+
+const urlUnited = "https://www.tibia.com/community/?subtopic=guilds&page=view&GuildName=United&action=characters";
+const urlObscubraPune = "https://www.tibia.com/community/?subtopic=guilds&page=view&GuildName=Obscubra+Pune";
+const urlServidor = "https://www.tibia.com/community/?subtopic=worlds&world=Obscubra";
+
+url = urlObscubraPune;
 
 var collection = [];
-getCharacters();
+var collectionServidor = [];
 
-server.get('/chares', (req, res) => {
+getCharactersGuild();
+getCharactersServidor();
+
+server.get('/hunteds', (req, res) => {
     console.log(req)
-    return res.json(collection)
+    return res.json(collectionServidor)
 });
 
 server.listen(3000, () => {
@@ -19,7 +29,7 @@ server.listen(3000, () => {
 });
 
 
-async function getCharacters() {
+async function getCharactersGuild() {
 
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
@@ -51,6 +61,35 @@ async function getCharacters() {
         collection.push(character);
 
         count += 1;
+
+    });
+
+    collection = collection.filter(c => c.status == 'online')
+
+}
+
+async function getCharactersServidor() {
+
+    const { data } = await axios.get(urlServidor);
+    const $ = cheerio.load(data);
+
+    var count = 0;
+
+    $('.Table2 tbody tr td div table tbody tr').slice(1).each((i, elem) => {
+
+        var character = new Object();
+
+        character.nome = $(elem).find('td:eq(0)').text();
+        character.level = $(elem).find('td:eq(1)').text();
+        character.profissao = $(elem).find('td:eq(2)').text();
+
+        let aux = collection.filter(c => c.nome == character.nome);
+
+        if (aux.length == 0) {
+            collectionServidor.push(character);
+
+            count += 1;
+        }
 
     });
 
