@@ -2,7 +2,7 @@ var timer = 10000;
 var quantidadeAlerta = 10;
 
 $(document).ready(function() {
-
+  
     setInterval(function() {
         carregarTabela();
     }, timer);
@@ -46,13 +46,19 @@ function carregarTabela() {
       });
 }
 
-function enviarAlerta() {
+async function enviarAlerta() {
 
     let quantidade = $('.total').text();
 
     if (quantidade > quantidadeAlerta) {
+
         let texto = `Atenção!, ${quantidade} hunteds online.`;
+
         let ut = new SpeechSynthesisUtterance(texto);
+
+        var vozDoGoogle = window.speechSynthesis.getVoices().find(voice => voice.name === 'Google português do Brasil');
+
+        ut.voice = vozDoGoogle;
     
         window.speechSynthesis.speak(ut);
     }
