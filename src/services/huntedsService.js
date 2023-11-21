@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const Configuracoes = require("../configs/Configuracoes");
+const Utils = require('../utils/Utils')
 
 
 
@@ -67,7 +68,7 @@ const getHunteds = async () => {
 
     });
 
-    return huntedsList;
+    return huntedsList.sort(Utils.OrdenarHunteds);
 }
 
 module.exports = {
