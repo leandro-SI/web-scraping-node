@@ -1,11 +1,12 @@
+var timer = 10000
+
 $(document).ready(function() {
-    carregarTabela();
+
+    setInterval(function() {
+        carregarTabela();
+    }, timer);
+
 });
-
-
-
-
-
 
 function carregarTabela() {
     $.ajax({
