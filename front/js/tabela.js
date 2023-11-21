@@ -13,11 +13,11 @@ function carregarTabela() {
         url: 'http://localhost:3000/hunteds',
         method: 'GET',
         success: function(data) {
-          console.log('Data from the server:', data);
 
           $('.total').text(data.total);
 
           var tbody = $('.table-hunteds tbody');
+          
           tbody.empty();
 
           $.each(data.data, function(index, hunted) {
