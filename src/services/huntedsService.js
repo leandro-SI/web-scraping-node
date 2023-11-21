@@ -38,7 +38,7 @@ const getAll = async () => {
 
     });
 
-    allList = allList.filter(c => c.status == 'online')
+    //allList = allList.filter(c => c.status == 'online')
 
     return allList;
 }
