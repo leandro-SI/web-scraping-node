@@ -11,3 +11,15 @@ footer {
 .container {
     margin-bottom: 60px;
 }
+
+.div-title {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: auto auto;
+}
+
+.form-check {
+    padding-left: 28%;
+    margin-right: 20px;
+}

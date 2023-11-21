@@ -13,7 +13,15 @@
 <body>
 
     <div class="container">
-        <h1 class="text-center">Hunted List - <span class="total"></span></h1>
+
+        <div class="div-title">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="checkAlert">
+                <label class="form-check-label" for="checkAlert">Acionar Alerta</label>
+                
+            </div>
+            <h1>Hunted List - <span class="total">0</span></h1>
+        </div>        
 
         <div>
             <table class="table table-striped table-hunteds">
@@ -36,5 +44,6 @@
     </footer>
 
 <script src="js/tabela.js"></script>
+<script src="js/alerta.js"></script>
 </body>
 </html>
