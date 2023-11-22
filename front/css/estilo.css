@@ -17,9 +17,44 @@ footer {
     align-items: center;
     text-align: center;
     margin: auto auto;
+    justify-content: flex-end;
 }
 
-.form-check {
-    padding-left: 28%;
+.acionar-whatsapp {
+    padding-left: 4%;
     margin-right: 20px;
 }
+
+.acionar-alerta {
+    margin-right: 20px;
+}
+
+.apenas-premium {
+    margin-right: 20px;
+}
+
+.apenas-sd {
+    margin-right: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.c-carregando {
+    animation: is-rotating 1s infinite;
+    border: 6px solid #e5e5e5;
+    border-radius: 50%;
+    border-top-color: #51d4db;
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+    position: absolute;
+}
+
+@keyframes is-rotating {
+    to {
+      transform: rotate(1turn);
+    }
+}
+

@@ -1,11 +1,9 @@
-var timer = 10000;
-var quantidadeAlerta = 10;
-
 $(document).ready(function() {
-  
+  adicionarCarregamento();
     setInterval(function() {
+        adicionarCarregamento();
         carregarTabela();
-    }, timer);
+    }, Configs.timer);
 
     $('#checkAlert').change(function() {
         if (this.checked) {
@@ -16,41 +14,45 @@ $(document).ready(function() {
 });
 
 function carregarTabela() {
-    $.ajax({
-        url: 'http://localhost:3000/hunteds',
-        method: 'GET',
-        success: function(data) {
+  adicionarCarregamento();
+  $.ajax({
+      url: 'http://localhost:3000/hunteds',
+      method: 'GET',
+      success: function(data) {
 
-          $('.total').text(data.total);
+        $('.total').text(data.total);
 
-          var tbody = $('.table-hunteds tbody');
+        var tbody = $('.table-hunteds tbody');
 
-          tbody.empty();
+        tbody.empty();
 
-          $.each(data.data, function(index, hunted) {
-            var row = $('<tr>');
-            row.append('<td>' + hunted.nome + '</td>');
-            row.append('<td>' + hunted.level + '</td>');
-            row.append('<td>' + hunted.profissao + '</td>');
-            tbody.append(row);
-          });
+        $.each(data.data, function(index, hunted) {
+          var row = $('<tr>');
+          row.append('<td>' + hunted.nome + '</td>');
+          row.append('<td>' + hunted.level + '</td>');
+          row.append('<td>' + hunted.profissao + '</td>');
+          tbody.append(row);
+        });
 
-          if ($('#checkAlert').prop('checked')) {
-            enviarAlerta();
-          }
-
-        },
-        error: function(error) {
-          console.error('Error:', error);
+        if ($('#checkAlert').prop('checked')) {
+          enviarAlerta();
         }
-      });
+
+        removerCarregamento();
+        
+      },
+      error: function(error) {
+        console.error('Error:', error);
+      }
+    });
+
 }
 
 async function enviarAlerta() {
 
     let quantidade = $('.total').text();
 
-    if (quantidade > quantidadeAlerta) {
+    if (validarQuantidade(quantidade)) {
 
         let texto = `Atenção!, ${quantidade} hunteds online.`;
 
@@ -63,4 +65,24 @@ async function enviarAlerta() {
         window.speechSynthesis.speak(ut);
     }
 
+}
+
+function enviarWhatsapp() {
+
+}
+
+function validarQuantidade(quantidade) {
+
+    if (quantidade > Configs.quantidadeAlerta) {
+      return true;
+    }
+    return false;      
+}
+
+function removerCarregamento() {
+  $('.c-carregando').addClass('hidden');
+}
+
+function adicionarCarregamento() {
+  $('.c-carregando').removeClass('hidden');
 }

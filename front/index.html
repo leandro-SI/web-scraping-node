@@ -13,14 +13,27 @@
 <body>
 
     <div class="container">
-
+        <div class="c-carregando hidden"></div>
         <div class="div-title">
-            <div class="form-check form-switch">
+            
+            <div class="form-check form-switch acionar-whatsapp">
+                <input class="form-check-input" type="checkbox" id="checkWhatsapp" disabled>
+                <label class="form-check-label" for="checkWhatsapp">Acionar Whatsapp</label>                
+            </div>
+            <div class="form-check form-switch acionar-alerta">
                 <input class="form-check-input" type="checkbox" id="checkAlert">
-                <label class="form-check-label" for="checkAlert">Acionar Alerta</label>
-                
+                <label class="form-check-label" for="checkAlert">Acionar Alerta</label>                
+            </div>
+            <div class="form-check form-switch apenas-premium">
+                <input class="form-check-input" type="checkbox" id="checkPremium" disabled>
+                <label class="form-check-label" for="checkPremium">Apenas Premium</label>                
+            </div>
+            <div class="form-check form-switch apenas-sd">
+                <input class="form-check-input" type="checkbox" id="checklvl" disabled>
+                <label class="form-check-label" for="checklvl">Apenas 45+</label>                
             </div>
             <h1>Hunted List - <span class="total">0</span></h1>
+            
         </div>        
 
         <div>
@@ -45,5 +58,6 @@
 
 <script src="js/tabela.js"></script>
 <script src="js/alerta.js"></script>
+<script src="js/configs.js" ></script>
 </body>
 </html>
