@@ -3,7 +3,9 @@ const { getHunteds } = require("../services/huntedsService")
 
 const getAllHunteds = async (request, response) => {
 
-    const hunteds = await getHunteds();
+    let premium = request.query.premium;
+
+    let hunteds = await getHunteds(premium);
 
     let dataResponse = {
         data: hunteds,

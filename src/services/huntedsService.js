@@ -2,6 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const Configuracoes = require("../configs/Configuracoes");
 const Utils = require('../utils/Utils')
+const CharacterServidor = require('../models/CharacterServidor')
 
 
 
@@ -39,12 +40,10 @@ const getAll = async () => {
 
     });
 
-    //allList = allList.filter(c => c.status == 'online')
-
     return allList;
 }
 
-const getHunteds = async () => {
+const getHunteds = async (premium) => {
 
     let todos = await getAll();
     let huntedsList = [];
@@ -67,6 +66,16 @@ const getHunteds = async () => {
         }
 
     });
+   
+    let vocacoes = ['Master', 'Royal', 'Elite', 'Elder'];
+
+    if (premium == 1) {
+        huntedsList = await huntedsList.filter(h => 
+            h.profissao.includes(vocacoes[0]) ||
+            h.profissao.includes(vocacoes[1]) ||
+            h.profissao.includes(vocacoes[2]) ||
+            h.profissao.includes(vocacoes[3]));
+    }
 
     return huntedsList.sort(Utils.OrdenarHunteds);
 }

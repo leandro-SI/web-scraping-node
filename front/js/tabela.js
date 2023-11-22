@@ -14,9 +14,17 @@ $(document).ready(function() {
 });
 
 function carregarTabela() {
+  
   adicionarCarregamento();
+
+  let premium = 0;
+
+  if ($('#checkPremium').prop('checked')) {
+    premium = 1;
+  }
+
   $.ajax({
-      url: 'http://localhost:3000/hunteds',
+      url: `http://localhost:3000/hunteds?premium=${premium}`,
       method: 'GET',
       success: function(data) {
 
