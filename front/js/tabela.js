@@ -84,7 +84,7 @@ function validarQuantidade(quantidade) {
     if (quantidade > Configs.quantidadeAlerta) {
       return true;
     }
-    return false;      
+      return false;      
 }
 
 function removerCarregamento() {
